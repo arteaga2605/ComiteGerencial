@@ -12,6 +12,5 @@ Mostrar filtros de futuros (funding, liquidaciones, order book)	python main.py s
 Ver ayuda general	python main.py -h
 # Para un solo símbolo con simulación automática
 python main.py run-with-simulator --symbol BTCUSDT
-
 # Para múltiples símbolos
 python main.py run-with-simulator --symbols BTCUSDT ETHUSDT SOLUSDT
