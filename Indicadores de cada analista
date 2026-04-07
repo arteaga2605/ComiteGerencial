@@ -1,0 +1,4 @@
+Analyst_1H	1 hora	RSI (14), MACD, EMA 9/21, Fibonacci (0.236-1.0), Soporte/Resistencia dinámica, Patrones de velas (Doji, Martillo, Engulfing)
+Analyst_4H	4 horas	Bandas de Bollinger (20,2), Estocástico (14,3,3), VWAP, Volumen relativo, OBV, CMF
+Analyst_1D	1 día	Ichimoku (9,26,52), ADX (14), CCI (20), OBV, CMF
+Analyst_1M	1 mes	SMA 50, SMA 200, RSI (14), Detección de máximos/mínimos crecientes

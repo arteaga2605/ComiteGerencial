@@ -1,0 +1,17 @@
+Lista completa de comandos y su forma correcta de ejecución
+Comando que quieres usar	Forma correcta de ejecutar
+Ejecutar un analista individual (1H)	python main.py run-analyst --timeframe 1h
+Ejecutar un analista individual (4H)	python main.py run-analyst --timeframe 4h
+Ejecutar un analista individual (1D)	python main.py run-analyst --timeframe 1d
+Ejecutar un analista individual (1M)	python main.py run-analyst --timeframe 1M
+Ejecutar todos los analistas + líder	python main.py run-all
+Generar reporte de aciertos y gráfico	python main.py generate-report
+python main.py run-all-multi --symbols BTCUSDT ETHUSDT SOLUSDT
+Crear ticket (acierto/fallo) interactivo	python main.py create-ticket
+Mostrar filtros de futuros (funding, liquidaciones, order book)	python main.py show-filters
+Ver ayuda general	python main.py -h
+# Para un solo símbolo con simulación automática
+python main.py run-with-simulator --symbol BTCUSDT
+
+# Para múltiples símbolos
+python main.py run-with-simulator --symbols BTCUSDT ETHUSDT SOLUSDT
