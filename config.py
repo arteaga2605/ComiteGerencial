@@ -1,6 +1,6 @@
 # config.py
 SYMBOL = 'BTCUSDT'  # símbolo por defecto (compatibilidad)
-SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']  # lista para análisis múltiple
+SYMBOLS = ['BTCUSDT', 'LINKUSDT', 'SOLUSDT']  # lista para análisis múltiple
 DB_PATH = 'trading_signals.db'
 
 # Timeframes
