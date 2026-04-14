@@ -1,0 +1,17 @@
+Escaneo realizado: 2026-04-12 20:10:03.392267
+==========================================================================================
+
+USDCUSDT | Precio: 0.9998 | Vol: $463,984,159
+  1W SUPPORT en 0.9997 (dist 0.01%) → BUY
+
+ADAUSDT | Precio: 0.2367 | Vol: $43,787,043
+  1M SUPPORT en 0.2367 (dist 0.0%) → WAIT
+
+FDUSDUSDT | Precio: 0.9993 | Vol: $20,121,435
+  1W RESISTANCE en 0.9994 (dist 0.01%) → SELL
+
+XUSDUSDT | Precio: 0.9999 | Vol: $2,688,732
+  1W SUPPORT en 1.0 (dist 0.01%) → WAIT
+
+USDEUSDT | Precio: 0.9996 | Vol: $2,529,734
+  1W RESISTANCE en 0.9996 (dist 0.0%) → WAIT

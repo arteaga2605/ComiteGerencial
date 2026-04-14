@@ -1,16 +1,25 @@
-Lista completa de comandos y su forma correcta de ejecución
-Comando que quieres usar	Forma correcta de ejecutar
-Ejecutar un analista individual (1H)	python main.py run-analyst --timeframe 1h
-Ejecutar un analista individual (4H)	python main.py run-analyst --timeframe 4h
-Ejecutar un analista individual (1D)	python main.py run-analyst --timeframe 1d
-Ejecutar un analista individual (1M)	python main.py run-analyst --timeframe 1M
-Ejecutar todos los analistas + líder	python main.py run-all
-Generar reporte de aciertos y gráfico	python main.py generate-report
-python main.py run-all-multi --symbols BTCUSDT ETHUSDT SOLUSDT
-Crear ticket (acierto/fallo) interactivo	python main.py create-ticket
-Mostrar filtros de futuros (funding, liquidaciones, order book)	python main.py show-filters
-Ver ayuda general	python main.py -h
-# Para un solo símbolo con simulación automática
-python main.py run-with-simulator --symbol BTCUSDT
-# Para múltiples símbolos
-python main.py run-with-simulator --symbols BTCUSDT ETHUSDT SOLUSDT
+Comandos disponibles (simplificados)
+python main.py sr-scan
+Escanea las 100 monedas con mayor volumen (excluyendo stablecoins y monedas estables como USD1, XUSD, USDE, etc.). Filtra por precio bajo (<10 USDT, excepto BTC y ETH). Detecta cuando el precio en temporalidad 4H toca niveles de soporte o resistencia de 1 mes (1M) o 1 semana (1w). Muestra una puntuación (score) y una alerta especial cuando BTC toca un nivel, indicando su posible influencia en el mercado.
+
+python main.py gem-hunter
+Busca criptomonedas infravaloradas (gemas ocultas) en el top 100 de pares USDT. Utiliza indicadores como RSI, medias móviles, MACD, volumen, y asigna una puntuación. Recomienda las 3 mejores opciones con operación LONG (solo compra), precio de entrada, take profit, stop loss y porcentaje de acierto estimado.
+
+python main.py smc-analyze --symbol BTCUSDT
+Análisis basado en Smart Money Concepts. Combina soporte/resistencia mensual, niveles de Fibonacci, ratio de volumen y patrones de velas en temporalidad 4H. Da señal LONG o SHORT con take profit fijo del +3%, stop loss del -1.5%, asumiendo un capital de 10 USDT y apalancamiento 10x. Muestra ganancia/pérdida esperada en dólares.
+
+python main.py generate-report
+Genera un reporte detallado del rendimiento histórico de los analistas basado en los tickets (aciertos/fallos) almacenados en la base de datos. Produce gráficos de barras (globales y por símbolo) y texto con porcentajes de acierto.
+
+python main.py create-ticket
+Modo interactivo para registrar manualmente una operación (analista, símbolo, dirección, precios, resultado). Útil para alimentar el reporte de rendimiento.
+
+python main.py show-filters --symbol BTCUSDT
+Muestra información de futuros para un símbolo: tasa de funding actual, liquidaciones recientes y el imbalance del order book (presión compradora/vendedora).
+
+python main.py sr-scan
+python main.py gem-hunter
+python main.py smc-analyze --symbol BTCUSDT
+python main.py generate-report
+python main.py create-ticket
+python main.py show-filters --symbol BTCUSDT

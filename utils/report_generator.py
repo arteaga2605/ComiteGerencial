@@ -26,7 +26,7 @@ class ReportGenerator:
     def generate_performance_chart(self, save_path='performance.png', symbol=None):
         accuracy = self.calculate_accuracy(symbol=symbol)
         if not accuracy:
-            print(f"No hay datos de tickets para generar gráfico{f' del símbolo {symbol}' if symbol else ''}.")
+            print("No hay datos de tickets para generar gráfico.")
             return
         
         analysts = list(accuracy.keys())
@@ -35,7 +35,7 @@ class ReportGenerator:
         
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
         
-        title_suffix = f" para {symbol}" if symbol else ""
+        title_suffix = f" para {symbol}" if symbol else " global"
         ax1.bar(analysts, acc_values, color=['green' if v>=50 else 'red' for v in acc_values])
         ax1.set_ylabel('Porcentaje de aciertos (%)')
         ax1.set_title(f'Precisión por Analista{title_suffix}')
@@ -50,38 +50,37 @@ class ReportGenerator:
             ax2.text(i, v + 0.5, str(v), ha='center')
         
         plt.tight_layout()
-        filename = f"performance_{symbol}.png" if symbol else save_path
-        plt.savefig(filename)
+        plt.savefig(save_path)
         plt.close()
-        print(f"Gráfico guardado en {filename}")
+        print(f"Gráfico guardado en {save_path}")
     
     def generate_text_report(self, symbol=None):
         accuracy = self.calculate_accuracy(symbol=symbol)
         if not accuracy:
-            return f"No hay suficientes tickets para generar reporte{f' de {symbol}' if symbol else ''}.\n"
+            return "No hay suficientes tickets para generar reporte.\n"
         
-        header = f"=== REPORTE DE RENDIMIENTO POR ANALISTA{f' - {symbol}' if symbol else ''} ===\n\n"
-        lines = [header]
+        report = f"=== REPORTE DE RENDIMIENTO POR ANALISTA{f' - {symbol}' if symbol else ''} ===\n\n"
         for analyst, data in accuracy.items():
-            lines.append(f"{analyst}:")
-            lines.append(f"  Operaciones totales: {data['total']}")
-            lines.append(f"  Aciertos: {data['wins']}")
-            lines.append(f"  Porcentaje de acierto: {data['accuracy']:.2f}%\n")
-        return '\n'.join(lines)
+            report += f"{analyst}:\n"
+            report += f"  Operaciones totales: {data['total']}\n"
+            report += f"  Aciertos: {data['wins']}\n"
+            report += f"  Porcentaje de acierto: {data['accuracy']:.2f}%\n\n"
+        return report
     
-    def generate_full_report(self):
-        """Genera reporte global y por cada símbolo disponible"""
+    def generate_detailed_report(self):
+        """Genera reporte completo con desglose por símbolo y global"""
         # Reporte global
         global_text = self.generate_text_report()
-        print(global_text)
-        self.generate_performance_chart(save_path='performance_global.png', symbol=None)
+        self.generate_performance_chart(symbol=None)
         
-        # Obtener símbolos únicos de tickets
+        # Obtener todos los símbolos únicos de tickets
         tickets = self.db.get_all_tickets()
         if not tickets.empty and 'symbol' in tickets.columns:
             symbols = tickets['symbol'].unique()
             for sym in symbols:
-                print(f"\n--- Reporte para {sym} ---")
+                print(f"\n--- Desglose para {sym} ---")
                 sym_text = self.generate_text_report(symbol=sym)
                 print(sym_text)
                 self.generate_performance_chart(save_path=f'performance_{sym}.png', symbol=sym)
+        
+        return global_text

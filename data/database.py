@@ -1,4 +1,4 @@
-# data/database.py (completo con mejoras)
+# data/database.py
 import sqlite3
 from config import DB_PATH
 import pandas as pd
@@ -94,14 +94,6 @@ class Database:
             return pd.read_sql_query(query, self.conn, params=(symbol,))
         else:
             return pd.read_sql_query("SELECT * FROM tickets", self.conn)
-    
-    def get_tickets_by_analyst_and_symbol(self, analyst_name, symbol=None):
-        if symbol:
-            query = "SELECT * FROM tickets WHERE analyst_name = ? AND symbol = ?"
-            return pd.read_sql_query(query, self.conn, params=(analyst_name, symbol))
-        else:
-            query = "SELECT * FROM tickets WHERE analyst_name = ?"
-            return pd.read_sql_query(query, self.conn, params=(analyst_name,))
     
     def close(self):
         self.conn.close()

@@ -10,7 +10,10 @@ class BinanceClient:
     
     @staticmethod
     def get_klines(symbol, interval, limit=200):
-        """Obtiene velas spot (mismas que futuros en precio)"""
+        """
+        Obtiene velas históricas sin API key.
+        Retorna DataFrame con columnas: timestamp, open, high, low, close, volume
+        """
         endpoint = f"{BinanceClient.BASE_URL}/klines"
         params = {
             'symbol': symbol,
@@ -18,7 +21,7 @@ class BinanceClient:
             'limit': limit
         }
         try:
-            response = requests.get(endpoint, params=params)
+            response = requests.get(endpoint, params=params, timeout=10)
             response.raise_for_status()
             data = response.json()
             
@@ -35,7 +38,8 @@ class BinanceClient:
             df = df[['timestamp', 'open', 'high', 'low', 'close', 'volume']]
             return df
         except Exception as e:
-            print(f"Error obteniendo velas: {e}")
+            # No imprimir error para no saturar consola, pero se puede activar en debug
+            # print(f"Error obteniendo velas {symbol} {interval}: {e}")
             return pd.DataFrame()
     
     @staticmethod
@@ -44,7 +48,7 @@ class BinanceClient:
         endpoint = f"{BinanceClient.FUTURES_BASE_URL}/premiumIndex"
         params = {'symbol': symbol}
         try:
-            resp = requests.get(endpoint, params=params)
+            resp = requests.get(endpoint, params=params, timeout=10)
             resp.raise_for_status()
             data = resp.json()
             return float(data.get('lastFundingRate', 0))
@@ -57,7 +61,7 @@ class BinanceClient:
         endpoint = f"{BinanceClient.BASE_URL}/depth"
         params = {'symbol': symbol, 'limit': limit}
         try:
-            resp = requests.get(endpoint, params=params)
+            resp = requests.get(endpoint, params=params, timeout=10)
             resp.raise_for_status()
             data = resp.json()
             bids = [[float(price), float(qty)] for price, qty in data['bids']]
@@ -72,7 +76,7 @@ class BinanceClient:
         endpoint = f"{BinanceClient.FUTURES_BASE_URL}/forceOrders"
         params = {'symbol': symbol, 'limit': limit}
         try:
-            resp = requests.get(endpoint, params=params)
+            resp = requests.get(endpoint, params=params, timeout=10)
             resp.raise_for_status()
             data = resp.json()
             return data.get('forceOrders', [])
